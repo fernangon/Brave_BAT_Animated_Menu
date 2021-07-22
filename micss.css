@@ -1,0 +1,194 @@
+@import url(http://db.onlinewebfonts.com/c/55d433372d270829c51e2577a78ef12d?family=Monument+Extended);
+
+body {
+    margin: 0;
+
+    font-family: "Monument Extended";
+
+    background: url("https://media.giphy.com/media/xT9IgN8YKRhByRBzMI/giphy.gif");
+    background-size: cover;
+}
+
+
+.menu__item {
+    position: relative;
+
+    padding: 0 6vw;
+}
+
+
+.menu__item-link {
+    display: inline-block;
+
+    position: relative;
+
+    /* (Non-standard) No recomendables usar ------------------------------------------------------------------------------------------------------------------------ */
+    
+    /* 
+    The -webkit-text-stroke CSS property specifies the width and color of strokes for text characters. 
+    This is a shorthand property for the longhand properties -webkit-text-stroke-width and -webkit-text-stroke-color. 
+    */    
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke */
+    -webkit-text-stroke: 1.5px #fff;
+
+    /* 
+    The -webkit-text-fill-color CSS property specifies the fill color of characters of text. 
+    If this property is not set, the value of the color property is used. 
+    */
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-fill-color */
+    -webkit-text-fill-color: transparent;
+
+    /* (Non-standard) No recomendables usar ------------------------------------------------------------------------------------------------------------------------ */
+
+    color: transparent;
+
+    cursor: pointer; /* Lo pone porque en el html al <a> le quitó el href */
+
+    transition: opacity .4s;
+}
+
+.menu__item-link::before {
+    position: absolute;
+    bottom: 60%;
+
+    /* 
+    The all shorthand CSS property resets all of an element's properties except unicode-bidi, direction, and CSS Custom Properties. 
+    It can set properties to their initial or inherited values, or to the values specified in another stylesheet origin. 
+    */
+    all: initial;
+
+    /* 
+    The counter-increment property increases or decreases the value of one or more CSS counters.
+    The counter-increment property is usually used together with the counter-reset property and the content property. 
+    https://www.w3schools.com/cssref/tryit.asp?filename=trycss_counter-reset
+    */
+    counter-increment: menu;
+
+    /* The pointer-events property defines whether or not an element reacts to pointer events. */
+    pointer-events: none; /* none = The element does not react to pointer events */ 
+
+    font-family: "Monument Extended";
+}
+
+.menu__item-link:hover {
+    opacity: 0; /* Transparente */
+
+    transition-duration: .1s;
+}
+
+
+.menu__item-img {
+    position: absolute; /* Posicionado con respecto a su ancestro posicionado más cercano: "menu__item" */
+    top: 50%;
+    left: 100%;
+
+    height: 50vh;
+    max-height: 400px;
+
+    opacity: 0; /* Transparente */
+
+    pointer-events: none;
+
+    /* The translate3d() CSS function repositions an element in 3D space. Its result is a <transform-function> data type. */
+    transform: translate3d(calc(-100% - 6vw), -30%, 0) translate3d(0, 20px, 0);
+}
+
+
+.menu__item-link:hover + .menu__item-img {
+    opacity: 1; /* Imagen visible */
+
+    transform: translate3d(calc(-100% - 6vw), -30%, 0) rotate3d(0, 0, 1, 4deg);
+
+    transition: all .4s;
+}
+
+
+.menu {
+    padding: 10vh 0 25vh; /* top = 10vh, right/left = 0, bottom = 25vh */
+
+    --offset: 20vw;
+    --move-initial: calc(-25% + var(--offset));
+    --move-final: calc(-50% + var(--offset));
+
+    font-size: 7vw;
+}
+
+
+.marquee {
+    position: absolute; /* Posicionado con respecto a su ancestro posicionado más cercano: "menu__item" */
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    /* The mix-blend-mode property specifies how an element's content should blend with its direct parent background. */
+    mix-blend-mode: difference;
+
+    color: #fff;
+}
+
+.marquee .marquee__inner {
+    display: flex;
+
+    position: relative;
+
+    /* The fit-content behaves as fit-content(stretch). In practice this means that the box will use the available space, but never more than max-content. */
+    width: fit-content;
+
+    opacity: 0; /* De momento las letras en movimiento no se ven: transparente */
+
+    transition: opacity .1s;
+
+    animation: marquee 5s linear infinite;
+    animation-play-state: paused; /* De momento las letras en movimiento están pausadas.  */
+}
+
+
+.menu__item-link:hover ~ .marquee .marquee__inner {
+    opacity: 1; /* Las letras en movimiento: visibles. */
+
+    transition-duration: .4s;
+
+    animation-play-state: running; /* Las letras en movimiento */
+}
+
+
+.menu__item-link,
+.marquee span {
+    padding: 0 1vw;
+
+    line-height: 1.20;
+
+    /* The white-space property specifies how white-space inside an element is handled. */
+    white-space: nowrap; /* Que las palabras estén contínuas, sin saltar a nueva línea. */
+
+    font-size: 7vw;
+    font-weight: 900;
+}
+
+
+.marquee span {
+    font-style: italic;
+}
+
+
+
+/* KEYFRAMES ------------------------------------------------------------------------------------------ */
+
+@keyframes marquee {
+    0% {
+        transform: translate3d(var(--move-initial), 0, 0);
+    }
+
+    100% {
+        transform: translate3d(var(--move-final), 0, 0);
+    }
+}
+
+
+
+
+
+
